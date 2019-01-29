@@ -18,7 +18,7 @@ func (m *MyStruct) HandleMessage(msg *nsq.Message) error {
 
 	// sample call api
 	restCall := resty.R()
-	response, err := restCall.Post("https://jsonplaceholder.typicode.com/todos/1")
+	response, err := restCall.Get("https://jsonplaceholder.typicode.com/todos/1")
 	if err != nil {
 		fmt.Printf(err.Error())
 	}
