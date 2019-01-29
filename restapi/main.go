@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/nsqio/go-nsq"
+	resty "gopkg.in/resty.v1"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,6 +15,15 @@ type MyStruct struct {
 
 func (m *MyStruct) HandleMessage(msg *nsq.Message) error {
 	fmt.Printf(">>> %s\n", string(msg.Body))
+
+	// sample call api
+	restCall := resty.R()
+	response, err := restCall.Post("https://jsonplaceholder.typicode.com/todos/1")
+	if err != nil {
+		fmt.Printf(err.Error())
+	}
+	fmt.Printf(">>> %v", string(response.Body()))
+
 	return nil
 }
 
